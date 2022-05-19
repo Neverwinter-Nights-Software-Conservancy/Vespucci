@@ -1,0 +1,61 @@
+* Preferences dialog
+* Pref: map matte color
+* Pref: basedir
+* Pref: log filter level
+* Pref: log file
+* Pref: default scale
+* Pref: default save name (0:resref,1:area name,2:tag)
+* Pref: image caching on/off
+* Pref: tile caching on/off
+* Pref: ???
+
+Properties: 
+- Name		The human readable name
+- Type		Edit Widget
+- Section	Ini file section/Prefs dialog section
+- Key		Ini file key
+- valref	Reference to variable holding the prop's its value
+- tooltip	Mouseover text in prefs dialog
+- default	scalar or array.  If scalar, then platform agnostic value
+			otherwise platform dependant:
+			[ Unix, Windows, Mac ]
+
+$config, $opconf, $tmpconf
+--------------------------
+$config is the Config::Tiny instance we use to read/write the
+ini file.
+
+$opconf is the hash that the program uses
+
+$tmpconf is the hash used by the prefs dialog
+
+prefs dialog
+------------
+Cancel -> copies $opconf to $tmpconf
+Apply -> copies $tmpconf to $opconf
+		 sets $dityop
+
+Save -> copies $tmpconf to $opconf,
+		copies $tmpconf to $config,
+		calls $config->write($cfgpath)
+		clears $dirtyop
+
+Why $opconf AND $config
+-----------------------
+Last dirpos and Last 5 erfs opened support
+
+Browse to a directory or
+sets values in $config directly
+
+Initialization of $opconf and $tmpconf never get the directory or
+file stuff so cannot pollute them.
+
+Log Levels
+----------
+0 FATAL
+1 ERROR
+2 WARNING
+3 ALERT
+4 INFO
+
+9 DEBUG

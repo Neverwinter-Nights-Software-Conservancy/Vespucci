@@ -1,0 +1,89 @@
+Vespucci - NWN minimap viewer
+=============================
+
+Copyright (c) 2003-2004 John Klar, paladin@projectplasma.com
+
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl iteself.
+
+The Vespucci project is a utility to render Aurora engine "minimaps".
+Aurora is the game engine written by Bioware for their Neverwinter
+Nights CRPG.  Vespucci consists of a PerlTk frontend, a set of perl
+modules I've written to manage NWN resources, Adam Kennedy's
+Config::Tiny and Stephen Liddie's Tk::PhotoRotateSimple.
+
+This script has been tested under perl-5.8.0 on RedHat and ActiveState
+Perl 5.8.3 on Win2kpro.
+
+Notes
+============
+There are a few things to be aware of.  
+
+The Tk::Photo implementation uses a call marked deprecated.
+Consequently a flood of "objGlue.c:868: Tcl_ArgResult is deprecated"
+messages are spewed to the console.  Other than telling you to
+recompile PerlTk, there's not much else I can do to squelch them.
+
+Startup
+------------
+On startup and module load, Vespucci scans the game resource indicies
+and stores selected information in a hash.  There is a LOT of
+information, so this will take a bit of time.
+
+If the base directory defined in the config file does not contain the
+chitin.key file, the utility will raise an error dialog asking you to
+choose a directory that does or exit.
+
+Modules
+------------
+When a .MOD or .NWM is loaded, first the script scans for non-core
+resources and removes them.  Performance of this feature is much
+improved due to a new algorithm.
+
+Next it checks to see if it uses any hak's.  If it does, it'll open
+and index those as well. 
+
+Options
+============
+Vespucci will initialize itself from a config file located in
+$HOME/.vespucci under Linux or vespucci.ini in the launch directory
+under Win32.  On startup, if the utility doesn't find the config file,
+it offers to create one from the default values.  You may decline but
+it will continue to ask this question every time you start.
+
+If you change any options via the prefs dialog and only Apply them,
+the utility will raise a reminder dialog on exit asking you to Save,
+Discard, Edit or Cancel (the exit).
+
+The format follows .ini file format:
+
+[section]
+keyword=value
+
+The following keywords are defined without a section:
+
+basedir
+-------------
+The full path to the game installation directory.
+
+Defaults:
+ Linux: /usr/local/share/nwn
+ Win32: C:/NeverwinterNights/NWN
+
+defsavename
+-------------
+Enumeration to choose the default image savefile name.
+ 0 - resref
+ 1 - Area Name
+ 2 - Tag
+
+Default: 0
+    
+defglobalscale
+--------------
+Size multiplier.  Controls how big the image is when opened.
+ 0 - half size
+ 1 - normal
+ 2 - ...
+
+Default: 1

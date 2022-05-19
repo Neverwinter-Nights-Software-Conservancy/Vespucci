@@ -1,0 +1,86 @@
+Vespucci 
+---------------------------
+
+Wishlist
+-------------------------
+* Last directory browsed is persistant so that File->Open starts there.
+* Add basedir change option to Ignore new value for current session
+* Map windows should only open once.
+
+* Map "window" needs to be an object?
+
+* Change to 32x32 as base resolution?
+* Integrated browser with Tabs
+* Map window button to tabbify/windowify
+* Preference: open new maps in tab/separate window
+
+
+done
+-------------------------
+x Error dialog if unable to open file
+x Last 5 files opened are maintained in the Files menu
+x Save ALL minimap images (save only, no windows)
+x If basedir changed, strongly suggest reindexing
+  (but only if $nwn is valid)
+x If ini file not found, offer to create one
+x Errors dumped to Log window instead of stdout
+x If chitin.key not found, complain loudly, require configuration
+x If prefs not saved, complain on exit
+x Priority filtering
+x Prefs dialog needs polish
+x Log window
+x Preferences dialog
+x Save As (pops a FileSelection dialog)
+x Status bar shows ERF Index progress
+x BUG: RLE encoded TGA's not handled
+x unhandled RLE formats should cause program to complain
+x Splash screen with base resource Index progress
+x Resources take a progress variable reference
+x Warn about missing .tga's, paint a white rectangle.
+x Clean up the interface
+x Multiselect?
+x Scaling support
+x Map images should only be rendered once.
+x Config file
+  Linux:   $HOME/.vespucci
+  Windows: {launchdir}/vespucci.ini
+  Mac:     ???
+x Detect execution enviornment and choose appropriate base dir:
+  Linux:   /usr/local/share/nwn
+  Windows: C:/NeverwinterNights/NWN
+  Mac:     ???
+  Overridden by value in config file
+x If the MOD/NWM uses HAK's, scan them for resources
+x Opening a mod or nwm should eject the last one opened.
+x Save minimap image.
+x Selectable save naming convention
+  - Name
+  - ResRef
+  - Tag
+
+x Pref: map matte color
+x Pref: basedir
+x Pref: log filter level
+x Pref: log file
+x Pref: default scale
+x Pref: default save name (0:resref,1:area name,2:tag)
+x Pref: image caching on/off
+x Pref: tile caching on/off
+
+NWlib
+---------------------------
+* Performance
+* Add "FieldOrIndex...FieldOrIndex.Field" accessor syntax to NWlib::GFF
+
+
+Resources.pm
+---------------------------
+* DelERF( -file => ... )
+  - Add all hak's to eject list
+  - foreach $fqpn in eject_list
+    - get $loc ref from $self->{locations}->{$fqpn}
+    - remove $fqpn from $self->{locations}
+    - iterate resources $self->{toc} and remove any where $loc matches.
+
+Or ResetResources(): scan all resources and eject if they're ERF
+$loc->isa("NWlib::Location::ERF");

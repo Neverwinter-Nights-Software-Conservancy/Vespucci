@@ -1,0 +1,58 @@
+2004-04-11 minimap-0.9.2
+------------------------
+- TGA datatype 3 support (8bpp grayscale)
+- Error dialog if unable to open or process ERF
+
+2004-04-06 minimap-0.9.1
+------------------------
+- Better handling for unrecognized TGA formats.
+- Unrecognized TGA's will show up as reddish tiles by default.
+  Uncheck Prefs->Image->Flag bad tile images to make them show up white.
+
+2004-03-28 minimap-0.9.0
+------------------------
+- Too many things to remember, sorry :)
+
+2004-03-17 minimap-0.2.4
+------------------------
+- Now handles targa datatype 10 rle encoding
+- Now handles non 16x16 tiles
+- Splash screen with progress message
+
+2004-03-14 minimap-0.2.3
+------------------------
+- The area box supports 'extended' style multiselect
+- Map windows cleaned up (controls up top and inline)
+- Improved module load performance, should be close
+  to 0.1.0 performance.
+
+2004-03-14 minimap-0.2.2
+------------------------
+- Reads configuration from config file
+  Linux:   $HOME/.vespucci
+  Windows: {launchdir}/vespucci.ini
+- Scaling support and UI
+
+2004-03-12 minimap-0.2.1
+------------------------
+- ActiveState Perl doesn't like Tk::Photo->write, use workaround
+
+2004-03-11 minimap-0.2.0
+------------------------
+- Resources.pm will load all HAK's associated with a .mod or .nwm
+- GFF.pm now returns a ref to an array of strings if the fields is a
+  CExoLocString
+- Map windows now use Name instead of Resref
+- Default base directory chosen based on OS
+- Loading a new ERF will eject old ERF resources first
+- Maps may be saved
+- A per-image combobox offers names based on:
+  - ResRef
+  - Name
+  - Tag
+- The combobox allows user input.
+- Default name configurable
+
+2004-02-23 minimap-0.1.0
+------------------------
+Initial release
